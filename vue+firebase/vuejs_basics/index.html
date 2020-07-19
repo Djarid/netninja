@@ -6,11 +6,12 @@
     <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
 </head>
 <body>
-    <h1>Vue Basics></h1>
+    <h1>Vue Basics</h1>
     <div id="app">
         <h2>{{ title }}</h2>
-        <p>My name is {{ name }}</p>
-        <input type="text" name="" id="" v-model="name">
+        <button @click.alt="logMessage">click me</button>
+        <button @click.shift="logMessage">click me</button>
+        <a href="@http://www.google.com"  @click.prevent="logMessage">google</a>
     </div>
     
     <script src="app.js"></script>
