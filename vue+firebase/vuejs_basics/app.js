@@ -5,14 +5,6 @@ new Vue({
         name: "Ryu"
     },
     methods: {
-        updateName(e) {
-            // console.log(e.target.value)
-            if (e.target.value == "") {
-                this.name = "Ryu"
-            } else {
-                this.name = e.target.value
-            }
-            
-        }
+
     }
 })
