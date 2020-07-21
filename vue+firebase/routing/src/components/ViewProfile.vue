@@ -13,7 +13,7 @@ export default {
         }
     },
     methods: {
-        updateID() {
+        updateId() {
             this.userId = this.$route.params.user_id
         }
     },
