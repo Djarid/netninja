@@ -8,8 +8,9 @@
             </div>
             <div class="field add-ingredient">
                 <label for="add-ingredient">Add an ingredient</label>
-                <input type="text" name="add-ingredient">
+                <input type="text" name="add-ingredient" @keydown.tab.prevent="AddIng" v-model="another">
             </div>
+            <p v-if="feedback" class="red-text">{{ feedback }}</p>
             <div class="field center-align">
                 <button class="btn pink">Add Smoothie</button>
             </div>
@@ -23,12 +24,24 @@ export default {
     name: 'AddSmoothie',
     data() {
         return {
-            title: null
+            title: null,
+            another: null,
+            ingredients: [],
+            feedback: null
         }
     },
     methods: {
         AddSmoothie() {
-            console.log(this.title)
+            console.log(this.title, this.ingredients)
+        },
+        AddIng() {
+            if (this.another) {
+                this.ingredients.push(this.another)
+                this.another = ''
+                this.feedback = null
+            } else {
+                this.feedback = "You must enter a value to add an ingredient"
+            }
         }
     }
 }
