@@ -19,6 +19,7 @@
 </template>
 
 <script>
+import firebase from 'firebase/app'
 export default {
     name: 'Login',
     data() {
@@ -30,12 +31,33 @@ export default {
     },
     methods: {
         login() {
-            console.log(this.email, this.password)
+            if (this.email && this.password) {
+                firebase.auth().signInWithEmailAndPassword(this.email, this.password)
+                .then(cred => {
+                    console.log(cred.user)
+                    this.$router.push({name: 'GMap'})
+                }).catch(err => {
+                    this.feedback = err.message
+                })
+                this.feedback = null
+            } else {
+                this.feedback = "You must provide email and password"
+            }
         }
     }
 }
 </script>
 
 <style>
+.login {
+    max-width:  400px;
+    margin-top: 60px;
+}
 
+.login h2 {
+    font-size: 2.4em;
+}
+.login .field {
+    margin-block: 16px;
+}
 </style>
