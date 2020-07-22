@@ -3,7 +3,10 @@
         <div class="card">
             <h2 class="deep-purple-text center">{{profile.alias}}'s Wall</h2>
             <ul class="comments collectioon">
-                <li>Comment</li>
+                <li v-for="(comment, index) in comments" :key="index">
+                    <div class="deep-purple-text">{{comment.from}}</div>
+                    <div class="grey-text text-darken-2">{{comment.content}} </div>
+                </li>
             </ul>
             <form @submit.prevent="addComment">
                 <div class="field">
@@ -28,11 +31,14 @@ export default {
             profile: null,
             newComment: null,
             user: null,
-            feedback: null
+            feedback: null,
+            comments: []
         }
     },
     created() {
         let ref = db.collection('users')
+
+        // get current user
         ref.where('user_id', '==', firebase.auth().currentUser.uid).get()
         .then(snapshot => {
             snapshot.forEach(doc => {
@@ -43,9 +49,25 @@ export default {
             console.log(err)
         })
 
+        // profile data
         ref.doc(this.$route.params.id).get()
         .then(user => {
             this.profile = user.data()
+        })
+
+        // get comments
+        db.collection('comments').where('to', '==', this.$route.params.id)
+        .onSnapshot((snapshot) => {
+            snapshot.docChanges().forEach(change => {
+                if (change.type == 'added') {
+                    let data = change.doc.data()
+                    this.comments.unshift({
+                        from: data.from,
+                        content: data.content
+
+                    })
+                }
+            })
         })
     },
     methods: {
