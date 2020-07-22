@@ -26,6 +26,14 @@ Vue.use(VueRouter)
     path: '/login',
     name: 'Login',
     component: () => import(/* webpackChunkName: "login" */ '@/views/Login')
+  },
+  {
+    path: '/profile/:id',
+    name: 'ViewProfile',
+    component: () => import(/* webpackChunkName: "viewprofile" */ '@/views/ViewProfile'),
+    meta: {
+      requiresAuth: true
+    }
   }
 ]
 
