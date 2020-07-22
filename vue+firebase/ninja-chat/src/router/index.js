@@ -3,13 +3,16 @@ import VueRouter from 'vue-router'
 import Welcome from '../views/Welcome.vue'
 //import Chat from '@/views/Chat'
 
+/*eslint no-unused-vars: ["error", { "args": "after-used"}]*/
+
 Vue.use(VueRouter)
 
   const routes = [
   {
     path: '/',
     name: 'Welcome',
-    component: Welcome
+    component: Welcome,
+    props: true
   },
   // {
   //   path: '/about',
@@ -23,7 +26,14 @@ Vue.use(VueRouter)
     path: '/chat',
     name: 'Chat',
     component: () => import('@/views/Chat.vue'),
-    props: true
+    props: true,
+    beforeEnter: (to, from, next) => {
+      if (to.params.name) {
+        next()
+      } else {
+        next({name: 'Welcome', params: {feedback: 'You must specify a name'}})
+      }
+    }
   }
 
 ]

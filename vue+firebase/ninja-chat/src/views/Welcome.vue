@@ -36,6 +36,11 @@ export default {
         this.feedback = 'You must enter a name to join'
       }
     }
+  },
+  beforeMount() {
+    if (this.$attrs.feedback) {
+      this.feedback = this.$attrs.feedback
+    }
   }
 }
 </script>
