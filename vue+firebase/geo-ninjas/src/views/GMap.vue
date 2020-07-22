@@ -14,15 +14,15 @@ export default {
     name: 'GMap',
     data() {
         return {
-            lat: 53,
-            lng: -2
+            lat: 52.76833,
+            lng: -1.62554
         }
     },
     methods: {
         renderMap() {
             const map = new google.maps.Map(document.getElementById('map'), {
                 center: { lat: this.lat , lng: this.lng},
-                zoom: 9,
+                zoom: 11,
                 maxZoom: 15,
                 minZoom: 3,
                 streetViewControl: false
@@ -30,9 +30,20 @@ export default {
         }
     },
     mounted() {
-        this.renderMap() 
-        console.log(firebase.auth().currentUser)
-
+        // get user geolocation
+        if (navigator.geolocation) {
+            navigator.geolocation.getCurrentPosition(pos => {
+                this.lat = pos.coords.latitude
+                this.lng = pos.coords.longitude
+                this.renderMap()
+            }, (err) => {
+                console.log(err)
+                this.renderMap()
+            },{ maximumAge: 60000, timeout: 30000})
+        } else {
+            // position centre by default values
+            this.renderMap()
+        }
     }
 }
 </script>
