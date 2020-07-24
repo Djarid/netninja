@@ -33,9 +33,9 @@ export default {
         return {
             drawer: true,
             links: [
-                { icon: 'mdi-view-dashboard', text: 'Dashboard', route: '/'},
-                { icon: 'mdi-folder', text: 'My Projects', route: '/projects'},
-                { icon: 'mdi-group', text: 'Team', route: '/team'},
+                { icon: 'mdi-view-dashboard', text: 'Dashboard', route: {name: 'dashboard'}},
+                { icon: 'mdi-folder', text: 'My Projects', route: {name: 'projects'}},
+                { icon: 'mdi-account', text: 'Team', route: {name:'team'}},
             ],
         }
     }
