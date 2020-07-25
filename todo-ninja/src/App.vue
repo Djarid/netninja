@@ -1,8 +1,8 @@
 <template>
-  <v-app class="pink lighten4">
+  <v-app>
     <Navbar />
-    <v-main>
-      <v-container>
+    <v-main class="grey lighten-4">
+      <v-container fluid>
         <router-view></router-view>
       </v-container>
     </v-main>    

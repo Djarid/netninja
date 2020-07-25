@@ -2,26 +2,21 @@
     <div class="dashboard">
         <v-subheading class="grey--text">Dashboard</v-subheading>
         <v-container  class="my-15">
-            <!-- <v-card flat v-for="project in projects" :key="project.title">
-                <v-layout row wrap :class="`pa-3 project ${project.status}`">
-                    <v-flex xs12 md6>
-                        <div class="caption white grey--text">Project Title</div>    
-                        <div>{{project.title}}</div>                                        
-                    </v-flex>
-                    <v-flex xs6 sm4 md2>
-                        <div class="caption grey--text">Person</div>
-                        <div>{{project.person}}</div>
-                    </v-flex>
-                    <v-flex xs6 sm4 md2>
-                        <div class="caption grey--text">Due by</div>
-                        <div>{{project.due}}</div>                    
-                    </v-flex>
-                    <v-flex xs2 sm4 md2>
-                        <div class="caption grey--text">Status</div>
-                        <div>{{project.status}}</div>                    
-                    </v-flex>
-                </v-layout>
-            </v-card> -->
+
+            <v-row row class=mb-3>
+                <v-btn small text @click="sortBy('title')">
+                    <v-icon left small>mdi-folder</v-icon>
+                    <span class="caption text-lowercase">By project name</span>
+                </v-btn>
+                <v-btn small text @click="sortBy('person')">
+                    <v-icon left small>mdi-account</v-icon>
+                    <span class="caption text-lowercase">By person</span>
+                </v-btn>
+                <v-btn small text @click="sortDescBy('due')">
+                    <v-icon left small>mdi-calendar</v-icon>
+                    <span class="caption text-lowercase">By due date</span>
+                </v-btn>
+            </v-row>
 
             <v-card flat tile class="px-3" v-for="project in projects" :key="project.title">
                 <v-row row wrap :class="`pl-3 project ${project.status}`">
@@ -38,8 +33,7 @@
                         <div>{{project.due}}</div>
                     </v-col>
                     <v-col cols="4" xs="4" sm="4" md="2">
-                        <div class="caption grey--text">Status</div>
-                        <div>{{project.status}}</div>
+                        <v-chip small :class="`${project.status} white--text caption my-2`">{{project.status}}</v-chip>
                     </v-col>
                 </v-row>
             <v-divider></v-divider>
@@ -60,6 +54,14 @@ export default {
                 { title: 'Create a community forum', person: 'Gouken', due: '20th Oct 2018', status: 'overdue', content: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Sunt consequuntur eos eligendi illum minima adipisci deleniti, dicta mollitia enim explicabo fugiat quidem ducimus praesentium voluptates porro molestias non sequi animi!'},
               ]            
         }
+    },
+    methods: {
+        sortBy(prop) {
+            this.projects.sort((a,b) => a[prop] < b[prop] ? -1 : 1)
+        },
+        sortDescBy(prop) {
+            this.projects.sort((a,b) => a[prop] > b[prop] ? -1 : 1)
+        }
     }
 }
 </script>
@@ -74,4 +76,14 @@ div.project.ongoing {
 .project.overdue {
     border-left: 4px solid tomato;
 }
+.theme--light.v-chip.complete:not(.v-chip--active) {
+    background: #3cd1c2;
+}
+.theme--light.v-chip.ongoing:not(.v-chip--active) {
+    background: #ffaa2c;
+}
+.theme--light.v-chip.overdue:not(.v-chip--active) {
+    background: #f83e70;
+}
+
 </style>
