@@ -1,7 +1,6 @@
 <template>
-    <div class="sashboard">
-        <h1>Dashboard</h1>
-        
+    <div class="dashboard">
+        <v-subheading class="grey--text">Dashboard</v-subheading>   
     </div>
 </template>
 

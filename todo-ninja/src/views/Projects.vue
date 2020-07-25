@@ -1,7 +1,6 @@
 <template>
     <div class="projects">
-        <h1>Projects</h1>
-        
+        <v-subheading class="grey--text">Projects</v-subheading>        
     </div>
 </template>
 
