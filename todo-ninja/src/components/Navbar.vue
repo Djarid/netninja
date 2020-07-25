@@ -37,6 +37,12 @@
             <v-row row justify="center">
                 <p class="white--text subheading mt-1">The Net Ninja</p>
             </v-row>
+
+            <!-- Popup button -->
+            <v-row row justify="center">
+                <Popup></Popup>
+            </v-row>
+
             <v-list>
                 <v-list-item  v-for="link in links" :key="link.text" router :to="link.route">
                     <v-list-item-action>
@@ -44,6 +50,7 @@
                     </v-list-item-action>
                     <v-list-item-content>
                         <v-list-item-title class="white--text">{{link.text}}</v-list-item-title>
+                        
                     </v-list-item-content>
                 </v-list-item>
             </v-list>
@@ -52,7 +59,14 @@
 </template>
 
 <script>
+import Popup from '@/components/Popup'
+
 export default {
+    name: 'Navbar',
+    props: ['one'],
+    components: {
+        Popup
+    },
     data() {
         return {
             drawer: true,

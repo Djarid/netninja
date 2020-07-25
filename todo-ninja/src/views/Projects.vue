@@ -1,6 +1,6 @@
 <template>
     <div class="projects">
-        <v-subheading class="grey--text">Projects</v-subheading>
+        <v-subheader class="grey--text">Projects</v-subheader>
         <v-container  class="my-15">
             <v-expansion-panels>
                 <v-expansion-panel v-for="(project, idx) in myProjects" :key="idx">
@@ -16,7 +16,6 @@
                 </v-expansion-panel>
             </v-expansion-panels>
         </v-container>
-            
     </div>
 </template>
 
@@ -38,6 +37,9 @@ export default {
                 return project.person === 'The Net Ninja'
             })
         }
+    },
+    created() {
+
     }
 }
 </script>
