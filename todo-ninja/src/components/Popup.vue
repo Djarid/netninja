@@ -9,9 +9,17 @@
                 <h2>Add a New Project</h2>
             </v-card-title>
             <v-card-text>
-                <v-form class="px-3">
-                   <v-text-field label="title" v-model="title" prepend-icon="mdi-folder"></v-text-field>
-                   <v-textarea label="Description" v-model="content" prepend-icon="mdi-pencil"></v-textarea>
+                <v-form class="px-3" ref="form">
+                    <v-text-field label="title" v-model="title" prepend-icon="mdi-folder" :rules="inputRules"></v-text-field>
+                    <v-textarea label="Description" v-model="content" prepend-icon="mdi-pencil" :rules="inputRules"></v-textarea>
+
+                    <v-menu>
+                        <template v-slot:activator="{on, attrs}">
+                            <v-text-field v-bind="{attrs}" v-on="on" label="Due date" prepend-icon="mdi-calendar" :value="formattedDate" :rules="inputRules"></v-text-field>    
+                        </template>
+                        <v-date-picker v-model="due"></v-date-picker>
+                    </v-menu>
+
                 </v-form>
             </v-card-text>
             <v-card-actions>
@@ -24,15 +32,30 @@
 </template>
 
 <script>
+import moment from 'moment'
 export default {
     name: 'Popup',
     data: () => ({
         title: '',
         content: '',
+        due: '',
+        inputRules: [
+            v => v && v.length >= 3 || 'Minimum length is 3 characters',
+        ]
     }),
     methods: {
         submit() {
-            console.log(this.title, this.content)
+            if (this.$refs.form.validate()) {
+                console.log(this.title, this.content)
+                this.title = ''
+                this.content = ''
+                this.due = ''
+            }
+        }
+    },
+    computed: {
+        formattedDate() {
+            return this.due ? moment(this.due).format('Do MMM YYYY') : '' 
         }
     }
 }
