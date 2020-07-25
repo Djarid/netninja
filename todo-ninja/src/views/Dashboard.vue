@@ -24,8 +24,8 @@
             </v-card> -->
 
             <v-card flat tile class="px-3" v-for="project in projects" :key="project.title">
-                <v-row row wrap>
-                    <v-col cols="12" xs="12" md="6" class="`pl-3 project ${project.status`">
+                <v-row row wrap :class="`pl-3 project ${project.status}`">
+                    <v-col cols="12" xs="12" md="6">
                         <div class="caption grey--text">Project Title</div>
                         <div>{{project.title}}</div>
                     </v-col>
@@ -43,6 +43,7 @@
                     </v-col>
                 </v-row>
             </v-card>
+            <v-divider></v-divider>
         </v-container>
 
     </div>
@@ -64,13 +65,13 @@ export default {
 </script>
 
 <style>
-.project .complete {
+.project.complete {
     border-left: 4px solid #3cd1c2;
 }
-.project .ongoing {
+div.project.ongoing {
     border-left: 4px solid orange;
 }
-.project .overdue {
+.project.overdue {
     border-left: 4px solid tomato;
 }
 </style>
