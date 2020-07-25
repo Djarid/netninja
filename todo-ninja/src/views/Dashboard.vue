@@ -1,6 +1,6 @@
 <template>
     <div class="dashboard">
-        <v-subheading class="grey--text">Dashboard</v-subheading>
+        <v-subheader class="grey--text">Dashboard</v-subheader>
         <v-container  class="my-15">
 
             <v-row row class=mb-3>
