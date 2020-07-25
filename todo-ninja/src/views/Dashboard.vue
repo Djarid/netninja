@@ -2,20 +2,26 @@
     <div class="dashboard">
         <v-subheading class="grey--text">Dashboard</v-subheading>
         <v-container  class="my-15">
-            <v-layout row>
-                <v-flex xs12 md6 >                
-                    <v-btn outlined block color="primary">1</v-btn>
-                </v-flex>
-                <v-flex xs4 md2 v-for="size in [2,3,4]" :key="size">
-                    <v-btn outlined block color="primary">{{size}}</v-btn>
-                </v-flex>
-            </v-layout>
-
-            <v-layout row wrap justify-space-around>
-                <v-flex xs4 md3 v-for="size in [1,2]" :key="size">
-                    <v-btn outlined block color="success">{{size}}</v-btn>
-                </v-flex>
-            </v-layout>
+            <v-card flat class="pa-3">
+                <v-layout row wrap>
+                    <v-flex xs12 md6>
+                        <div class="caption white grey--text">Project Title</div>    
+                        <div>Create a new website</div>                                        
+                    </v-flex>
+                    <v-flex xs6 sm4 md2>
+                        <div class="caption grey--text">Person</div>
+                        <div>The Net Ninja</div>
+                    </v-flex>
+                    <v-flex xs6 sm4 md2>
+                        <div class="caption grey--text">Due by</div>
+                        <div>1st Jan 2019</div>                    
+                    </v-flex>
+                    <v-flex xs2 sm4 md2>
+                        <div class="caption grey--text">Status</div>
+                        <div>ongoing</div>                    
+                    </v-flex>
+                </v-layout>
+            </v-card>
         </v-container>
     </div>
 </template>
