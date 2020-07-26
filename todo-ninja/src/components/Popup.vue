@@ -33,6 +33,8 @@
 
 <script>
 import moment from 'moment'
+import db from '@/firebase/init'
+
 export default {
     name: 'Popup',
     data: () => ({
@@ -46,7 +48,20 @@ export default {
     methods: {
         submit() {
             if (this.$refs.form.validate()) {
-                console.log(this.title, this.content)
+                const project = {
+                    title: this.title,
+                    content: this.content,
+                    due: moment(this.due).format('Do MM YYYY'),
+                    person: 'The Net Ninja',
+                    status: 'ongoing'
+                }
+
+                db.collection('projects').add(project).then(() => {
+                    console.log('added to db')
+                }).catch(err => { 
+                    console.log(err.message)
+                })
+                
                 this.title = ''
                 this.content = ''
                 this.due = ''
