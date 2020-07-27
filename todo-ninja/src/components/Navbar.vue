@@ -1,5 +1,13 @@
 <template>
     <nav>
+        
+        <v-snackbar top v-model="snackbar" @showSnackbar="showSnackbar($event)" :timeout="4000">
+            <span>{{ snackbarMessage }}</span>
+            <template v-slot:action="{ attrs }">
+                <v-btn color="success" text v-bind="attrs" @click="hideSnackbar">Close</v-btn>
+            </template>
+        </v-snackbar>
+
         <v-app-bar flat app>
             <v-app-bar-nav-icon class="grey--text" @click="drawer = !drawer"></v-app-bar-nav-icon>
             <v-toolbar-title class="text-uppercase grey--text">
@@ -23,6 +31,7 @@
                 </v-list>
             </v-menu>
 
+            <v-btn dark @click="showSnackbar('test')">Open Snackbar</v-btn>
             <v-btn depressed color="grey lighten-4">
                 <span>Sign Out</span>
                 <v-icon right>mdi-exit-to-app</v-icon>
@@ -40,7 +49,7 @@
 
             <!-- Popup button -->
             <v-row row justify="center">
-                <Popup></Popup>
+                <Popup @snackbar-message="showSnackbar"/>
             </v-row>
 
             <v-list>
@@ -75,6 +84,19 @@ export default {
                 { icon: 'mdi-folder', text: 'My Projects', route: {name: 'projects'}},
                 { icon: 'mdi-account', text: 'Team', route: {name:'team'}},
             ],
+            snackbar: false,
+            snackbarMessage: '...'
+        }
+    },
+    methods: {
+        showSnackbar(message) {
+            console.log("show snackbar")
+            this.snackbar = true
+            this.snackbarMessage = message
+        },
+        hideSnackbar() {
+            this.snackbar = false
+            this.snackbarMessage = '...'
         }
     }
 }
